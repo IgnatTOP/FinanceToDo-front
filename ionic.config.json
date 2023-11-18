@@ -1,0 +1,7 @@
+{
+  "name": "FinanceToDo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
