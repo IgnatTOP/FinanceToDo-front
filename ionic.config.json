@@ -1,7 +1,11 @@
 {
   "name": "FinanceToDo",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {
+      "server": {
+        "cleartext": true
+      }
+    }
   },
   "type": "vue-vite"
 }
