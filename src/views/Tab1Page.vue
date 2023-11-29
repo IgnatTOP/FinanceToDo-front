@@ -152,9 +152,9 @@
           </div>
           <div class="flex flex-col-reverse">
             <div
-              v-for="trans in getTransactions"
+              v-for="trans in lastFiveTransactions"
               :key="trans.id"
-              class="flex my-4 p-4 bg-white rounded-md shadow-md"
+              class="flex my-2 p-4 bg-white rounded-md shadow-md"
             >
               <div class="flex-grow">
                 <p class="text-lg font-semibold">{{ trans.title }}</p>
@@ -540,6 +540,9 @@ export default {
       userBalance: "getUserBalance",
       getTransactions: "getUserTransactions",
     }),
+    lastFiveTransactions() {
+      return this.getTransactions.slice(-3);
+    },
   },
 };
 </script>

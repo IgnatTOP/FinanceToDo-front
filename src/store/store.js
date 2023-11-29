@@ -327,6 +327,7 @@ export default createStore({
           }
         )
         .then((response) => {
+          dispatch("fetchTransactions");
           return response;
         })
         .catch((error) => {

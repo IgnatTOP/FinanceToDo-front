@@ -21,7 +21,8 @@
         <ion-content>
           <div
             class="flex flex-col items-center justify-center bg-white w-[90%] py-10 mx-auto rounded-2xl mt-10"
-          >            <ion-item class="w-[90%] rounded mx-auto">
+          >
+            <ion-item class="w-[90%] rounded mx-auto">
               <ion-input
                 class="text-center"
                 maxlength="16"
@@ -104,7 +105,7 @@
         </ion-content>
       </ion-modal>
       <ion-modal
-        :is-open="selectedType === 'create'"
+        :is-open="selectedsub === 'create'"
         :initial-breakpoint="0.4"
         :breakpoints="[0.4, 0.6]"
         :backdrop-dismiss="false"
@@ -243,7 +244,14 @@ export default {
         sub_category_id: this.selectedsub,
       };
 
-      this.$store.dispatch("fetchCategoryTransactionCreate", transactions);
+      this.$store
+        .dispatch("fetchCategoryTransactionCreate", transactions)
+        .then(() => {
+          this.isModalOpen = false;
+        })
+        .catch((error) => {
+          console.error("createsub action failed:", error);
+        });
     },
     closeModal() {
       this.isModalOpen = false;
@@ -252,7 +260,13 @@ export default {
       this.selectedType = null;
     },
     createsub() {
-      this.fetchCategorySubCreate(this.subtitle);
+      this.fetchCategorySubCreate(this.subtitle)
+        .then(() => {
+          this.selectedsub = null;
+        })
+        .catch((error) => {
+          console.error("createsub action failed:", error);
+        });
     },
   },
 };
@@ -296,7 +310,7 @@ ion-icon {
 }
 .larger-icon {
   position: absolute;
-  font-size: 40px; 
+  font-size: 40px;
   bottom: 1px;
 }
 .custom-tab-button {
