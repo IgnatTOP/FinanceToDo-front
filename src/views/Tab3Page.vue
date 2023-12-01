@@ -24,42 +24,62 @@
 </template>
 
 <script>
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonModal, IonInput, IonBackButton, IonItem, IonSelect, IonSelectOption } from "@ionic/vue";
-import { mapState, mapActions, mapGetters } from 'vuex';
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+  IonModal,
+  IonInput,
+  IonBackButton,
+  IonItem,
+  IonSelect,
+  IonSelectOption,
+} from "@ionic/vue";
+import { mapState, mapActions, mapGetters } from "vuex";
 
 export default {
-  name: 'Tab3Page',
+  name: "Tab3Page",
   components: {
-    IonBackButton, IonTitle, IonContent, IonToolbar, IonPage, IonModal, IonHeader, IonInput, IonItem, IonSelect, IonSelectOption
+    IonBackButton,
+    IonTitle,
+    IonContent,
+    IonToolbar,
+    IonPage,
+    IonModal,
+    IonHeader,
+    IonInput,
+    IonItem,
+    IonSelect,
+    IonSelectOption,
   },
 
   data() {
     return {
-        online: false,
+      online: false,
     };
   },
-  mounted: {
+  mounted() {
     this.fetchUser()
-    .then(res => {
+      .then((res) => {
         this.online = true;
       })
-      .catch(err => {
+      .catch((err) => {
         this.online = false;
       });
   },
   methods: {
-    ...mapActions(["fetchUser", "fetchUserBalance", "fetchTransactions"]),
-    logout(){
-      if(this.online){
+    ...mapActions(["fetchUser"]),
+    logout() {
+      if (this.online) {
         localStorage.clear();
-        this.$store.dispatch('resetStore');
+        this.$store.dispatch("resetStore");
         window.location.reload();
       } else {
         console.log("Ошибка нет интернета");
       }
-
-    }
+    },
   },
-
-}
+};
 </script>
