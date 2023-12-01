@@ -148,7 +148,7 @@
         <br />
         <div class="w-[95%] bg-white shadow rounded mx-auto p-2">
           <div class="px-3 py-2">
-            <p class="text-2xl">Последние транзацкции</p>
+            <p class="text-2xl">Последние транзакции</p>
           </div>
           <div class="flex flex-col-reverse">
             <div
@@ -164,6 +164,7 @@
               </div>
               <div class="ml-4">
                 <p class="text-lg font-semibold">{{ trans.value }} Р.</p>
+                <p class="text-md">id счета {{ trans.balance_id }}</p>
               </div>
             </div>
           </div>

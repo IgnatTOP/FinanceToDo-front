@@ -11,11 +11,13 @@
           <ion-title size="large">Профиль</ion-title>
         </ion-toolbar>
       </ion-header>
-      <br>
+      <br />
       <div class="w-[80%] mx-auto flex justify-center items-center">
-        <a @click="logout"
-           class="bg-blue-500 rounded-3xl w-full h-[50px] flex justify-center items-center text-white shadow-2xl shadow-blue-500/50 hover:bg-blue-600"
-        >Выйти</a>
+        <a
+          @click="logout"
+          class="bg-blue-500 rounded-3xl w-full h-[50px] flex justify-center items-center text-white shadow-2xl shadow-blue-500/50 hover:bg-blue-600"
+          >Выйти</a
+        >
       </div>
     </ion-content>
   </ion-page>
@@ -33,15 +35,29 @@ export default {
 
   data() {
     return {
-
+        online: false,
     };
   },
-
+  mounted: {
+    this.fetchUser()
+    .then(res => {
+        this.online = true;
+      })
+      .catch(err => {
+        this.online = false;
+      });
+  },
   methods: {
+    ...mapActions(["fetchUser", "fetchUserBalance", "fetchTransactions"]),
     logout(){
-      localStorage.clear();
-      this.$store.dispatch('resetStore');
-      window.location.reload();
+      if(this.online){
+        localStorage.clear();
+        this.$store.dispatch('resetStore');
+        window.location.reload();
+      } else {
+        console.log("Ошибка нет интернета");
+      }
+
     }
   },
 

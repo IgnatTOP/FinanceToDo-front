@@ -19,7 +19,128 @@
           </ion-toolbar>
         </ion-header>
         <ion-content>
-          <div
+          <div class="">
+            <div class="flex justify-center items-center my-3 space-x-5">
+              <a
+                class="px-3 py-1 rounded"
+                :class="{ 'bg-red-300': !isExpense, 'bg-red-400': isExpense }"
+                @click="setExpense"
+                >Расход</a
+              >
+              <a
+                class="px-3 py-1 rounded"
+                :class="{
+                  'bg-green-300': isExpense,
+                  'bg-green-400': !isExpense,
+                }"
+                @click="setIncome"
+                >Доход</a
+              >
+            </div>
+            <div
+              class="h-[100px] w-full flex items-center"
+              :class="isExpense ? 'bg-red-400' : 'bg-green-400'"
+            >
+              <div class="w-[50%]">
+                <div class="mx-10 text-xl text-white">
+                  <p>Укажите</p>
+                  <p>{{ isExpense ? "Расход" : "Доход" }}</p>
+                </div>
+              </div>
+              <label class="w-[75%] h-[50px] text-white mx-auto mr-5">
+                <input
+                  class="w-[80%] h-[50px] bg-transparent text-white text-2xl text-right border-none outline-none placeholder-white"
+                  maxlength="16"
+                  v-model="amount"
+                  @input="formatAmount"
+                />
+                Р.
+              </label>
+            </div>
+            <div class="w-full flex items-center justify-center flex-col">
+              <ion-item class="w-[95%] rounded">
+                <ion-icon aria-hidden="true" :icon="textOutline" class="mx-5" />
+                <ion-input
+                  label="Название"
+                  class="text-right mr-5 h-[60px]"
+                  v-model="titletrans"
+                  type="text"
+                ></ion-input>
+              </ion-item>
+              <ion-item class="w-[95%] rounded">
+                <ion-icon aria-hidden="true" :icon="busOutline" class="mx-5" />
+                <ion-select
+                  class="h-[60px]"
+                  label="Категория"
+                  v-model="selectedCategory"
+                  cancelText="Отмена"
+                  okText="Выбрать"
+                >
+                  <ion-select-option
+                    v-for="category in categories"
+                    :key="category.id"
+                    :value="category.id"
+                  >
+                    {{ category.title }}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-item class="w-[95%] rounded" v-if="selectedCategory">
+                <ion-icon aria-hidden="true" :icon="bagOutline" class="mx-5" />
+                <ion-select
+                  class="h-[60px]"
+                  label="Под-категория"
+                  v-model="selectedsub"
+                  cancelText="Отмена"
+                  okText="Выбрать"
+                >
+                  <ion-select-option
+                    v-for="category_sub in categories_sub"
+                    :key="category_sub.id"
+                    :value="category_sub.id"
+                  >
+                    {{ category_sub.title }}
+                  </ion-select-option>
+                  <ion-select-option value="create">
+                    Создать
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-item class="w-[95%] rounded" v-if="selectedCategory">
+                <ion-icon
+                  aria-hidden="true"
+                  :icon="serverOutline"
+                  class="mx-5"
+                />
+                <ion-select
+                  class="h-[60px]"
+                  label="Счет"
+                  v-model="selectedbalance"
+                  cancelText="Отмена"
+                  okText="Выбрать"
+                >
+                  <ion-select-option
+                    v-for="userBalance in userBalance"
+                    :key="userBalance.id"
+                    :value="userBalance.id"
+                  >
+                    {{ userBalance.title }}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+              <br />
+              <div class="w-[80%]">
+                <div class="w-full flex justify-center items-center">
+                  <a
+                    @click="addNewtrans"
+                    class="bg-blue-500 rounded-3xl w-full h-[50px] flex justify-center items-center text-white shadow-2xl shadow-blue-500/50 hover:bg-blue-600"
+                    >Добавить</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div
             class="flex flex-col items-center justify-center bg-white w-[90%] py-10 mx-auto rounded-2xl mt-10"
           >
             <ion-item class="w-[90%] rounded mx-auto">
@@ -101,7 +222,7 @@
                 >
               </div>
             </div>
-          </div>
+          </div> -->
         </ion-content>
       </ion-modal>
       <ion-modal
@@ -200,6 +321,7 @@ export default {
       selectedsub: "",
       titletrans: "",
       amount: null,
+      isExpense: true,
     };
   },
   mounted() {
@@ -232,6 +354,18 @@ export default {
       "fetchCategorySubCreate",
       "fetchCategoryTransactionCreate",
     ]),
+    setExpense() {
+      this.isExpense = true;
+    },
+    formatAmount() {
+      // Удаление пробелов и форматирование числа с добавлением пробелов каждые три цифры
+      this.amount = this.amount
+        .replace(/\s/g, "")
+        .replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    },
+    setIncome() {
+      this.isExpense = false;
+    },
     openModal() {
       this.isModalOpen = true;
       console.log(this.categories);
@@ -239,7 +373,7 @@ export default {
     addNewtrans() {
       const transactions = {
         title: this.titletrans,
-        value: this.amount,
+        value: this.amount.replace(/\s/g, ""),
         balance_id: this.selectedbalance,
         sub_category_id: this.selectedsub,
       };
@@ -345,5 +479,9 @@ import {
   todayOutline,
   personCircleOutline,
   addCircle,
+  textOutline,
+  busOutline,
+  bagOutline,
+  serverOutline,
 } from "ionicons/icons";
 </script>
