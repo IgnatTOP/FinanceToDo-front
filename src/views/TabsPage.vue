@@ -227,8 +227,8 @@
       </ion-modal>
       <ion-modal
         :is-open="selectedsub === 'create'"
-        :initial-breakpoint="0.4"
-        :breakpoints="[0.4, 0.6]"
+        :initial-breakpoint="0.6"
+        :breakpoints="[0.6, 0.8]"
         :backdrop-dismiss="false"
       >
         <ion-header>
