@@ -144,7 +144,6 @@
         </div>
       </div>
       <div class="mb-[40px]">
-        <p class="text-xl p-5">Номер: {{ userData.data.phone }}</p>
         <br />
         <div class="w-[95%] bg-white shadow rounded mx-auto p-2">
           <div class="px-3 py-2">
@@ -216,20 +215,6 @@
           </div>
         </div>
         <br />
-        <div class="w-[95%] bg-white shadow rounded mx-auto p-2">
-          <div class="px-3 py-2">
-            <p class="text-2xl">Статистика по категориям</p>
-          </div>
-          <br />
-          <div class="w-full">
-            <apexchart
-              type="bar"
-              height="450"
-              :options="chartOptionsBarstatCate"
-              :series="seriesBarstatCate"
-            ></apexchart>
-          </div>
-        </div>
       </div>
     </ion-content>
   </ion-page>
@@ -276,68 +261,6 @@ export default {
       RecordName: "",
       initialAmount: "",
       Error: 0,
-
-      seriesBarstatCate: [
-        {
-          name: "Продукты",
-          data: [44, 55],
-        },
-        {
-          name: "Табак",
-          data: [53, 32],
-        },
-        {
-          name: "Техника",
-          data: [12, 17],
-        },
-        {
-          name: "Хоз товары",
-          data: [9, 7],
-        },
-        {
-          name: "Аренда",
-          data: [25, 12],
-        },
-      ],
-      chartOptionsBarstatCate: {
-        chart: {
-          type: "bar",
-          height: 350,
-          stacked: true,
-          stackType: "100%",
-        },
-        plotOptions: {
-          bar: {
-            horizontal: false,
-            dataLabels: {
-              position: "top",
-            },
-          },
-        },
-        stroke: {
-          width: 1,
-          colors: ["#fff"],
-        },
-        xaxis: {
-          categories: ["Наличные", "Карта"],
-        },
-        tooltip: {
-          y: {
-            formatter: function (val) {
-              return val + "K";
-            },
-          },
-        },
-        fill: {
-          opacity: 1,
-        },
-        legend: {
-          position: "top",
-          horizontalAlign: "left",
-          offsetX: 40,
-        },
-      },
-
       seriesBarstat: [
         {
           name: "Actual",

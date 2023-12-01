@@ -12,7 +12,9 @@
         </ion-toolbar>
       </ion-header>
       <br />
-      <div class="w-[80%] mx-auto flex justify-center items-center">
+      <div class="w-[80%] mx-auto flex justify-center items-center flex-col">
+        <p class="text-xl p-5">Номер: {{ userData.data.phone }}</p>
+        <p class="text-xl p-5" v-if="error">Ошибка</p>
         <a
           @click="logout"
           class="bg-blue-500 rounded-3xl w-full h-[50px] flex justify-center items-center text-white shadow-2xl shadow-blue-500/50 hover:bg-blue-600"
@@ -58,6 +60,7 @@ export default {
   data() {
     return {
       online: false,
+      error: false,
     };
   },
   mounted() {
@@ -77,8 +80,14 @@ export default {
         this.$store.dispatch("resetStore");
         window.location.reload();
       } else {
+        this.error = true;
         console.log("Ошибка нет интернета");
       }
+    },
+  },
+  computed: {
+    userData() {
+      return this.$store.getters.getUserData;
     },
   },
 };
