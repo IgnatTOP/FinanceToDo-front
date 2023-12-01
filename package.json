@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "test:e2e": "cypress run",
     "test:unit": "vitest",
-    "lint": "eslint"
+    "lint": "eslint",
+    "resources": "capacitor-resources -p android,ios"
   },
   "dependencies": {
     "@capacitor/android": "5.5.1",
@@ -24,6 +25,7 @@
     "@vicons/utils": "^0.1.4",
     "apexcharts": "^3.44.0",
     "axios": "^1.6.2",
+    "capacitor-resources": "^2.0.5",
     "ionicons": "^7.0.0",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6",

@@ -23,43 +23,6 @@
           </ion-button>
         </ion-buttons>
       </ion-toolbar>
-      <div class="h-[250px] pb-[30px] w-full color-b flex items-center slider">
-        <div
-          class="w-[180px] flex-none scroll-start"
-          v-for="(account, index) in userBalance"
-          :key="index"
-        >
-          <div
-            class="ml-3 bg-white h-[170px] shadow-2xl rounded-2xl flex flex-col justify-center"
-          >
-            <div class="mx-5 container_shet">
-              <img src="../img/money_size.png" class="w-[50px]" />
-              <p class="text-lg text-gray-600">{{ account.title }}</p>
-              <p class="text-xl font-bold text-gray-800">{{ account.value }}</p>
-              <p class="text-lg text-gray-700">{{ account.currency }}</p>
-            </div>
-          </div>
-        </div>
-        <div class="w-[180px] flex-none scroll-start">
-          <div
-            class="mx-3 bg-white h-[170px] shadow-2xl rounded-2xl flex flex-col justify-center"
-          >
-            <div class="mx-5 text-center">
-              <div
-                class="flex flex-col items-center justify-center"
-                @click="openModal"
-              >
-                <div
-                  class="w-10 h-10 bg-blue-400 rounded-full flex items-center justify-center"
-                >
-                  <p class="text-white text-xl font-bold">+</p>
-                </div>
-                <p class="text-md mt-2 text-black">Добавить счет</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </ion-header>
 
     <ion-content :fullscreen="true">
@@ -143,6 +106,43 @@
           </div>
         </ion-content>
       </ion-modal>
+      <div class="h-[250px] pb-[30px] w-full color-b flex items-center slider">
+        <div
+          class="w-[180px] flex-none scroll-start"
+          v-for="(account, index) in userBalance"
+          :key="index"
+        >
+          <div
+            class="ml-3 bg-white h-[170px] shadow-2xl rounded-2xl flex flex-col justify-center"
+          >
+            <div class="mx-5 container_shet">
+              <img src="../img/money_size.png" class="w-[50px]" />
+              <p class="text-lg text-gray-600">{{ account.title }}</p>
+              <p class="text-xl font-bold text-gray-800">{{ account.value }}</p>
+              <p class="text-lg text-gray-700">{{ account.currency }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="w-[180px] flex-none scroll-start">
+          <div
+            class="mx-3 bg-white h-[170px] shadow-2xl rounded-2xl flex flex-col justify-center"
+          >
+            <div class="mx-5 text-center">
+              <div
+                class="flex flex-col items-center justify-center"
+                @click="openModal"
+              >
+                <div
+                  class="w-10 h-10 bg-blue-400 rounded-full flex items-center justify-center"
+                >
+                  <p class="text-white text-xl font-bold">+</p>
+                </div>
+                <p class="text-md mt-2 text-black">Добавить счет</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="mb-[40px]">
         <p class="text-xl p-5">Номер: {{ userData.data.phone }}</p>
         <br />

@@ -199,7 +199,7 @@ export default {
       selectedbalance: "",
       selectedsub: "",
       titletrans: "",
-      amount: 0,
+      amount: null,
     };
   },
   mounted() {
